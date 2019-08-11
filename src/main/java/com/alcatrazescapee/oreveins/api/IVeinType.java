@@ -161,6 +161,6 @@ public interface IVeinType<V extends IVein<?>>
      * @return a new vein instance
      */
     @Nonnull
-    V createVein(int chunkX, int chunkZ, Random rand);
+    V createVein(World w, int chunkX, int chunkZ, Random rand);
 
 }

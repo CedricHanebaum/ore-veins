@@ -14,6 +14,7 @@ import net.minecraft.util.math.BlockPos;
 
 import com.alcatrazescapee.oreveins.api.AbstractVein;
 import com.alcatrazescapee.oreveins.api.AbstractVeinType;
+import net.minecraft.world.World;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 @ParametersAreNonnullByDefault
@@ -47,18 +48,18 @@ public class VeinTypeCluster extends AbstractVeinType<VeinTypeCluster.VeinCluste
 
     @Nonnull
     @Override
-    public VeinCluster createVein(int chunkX, int chunkZ, Random rand)
+    public VeinCluster createVein(World w, int chunkX, int chunkZ, Random rand)
     {
-        return new VeinCluster(this, defaultStartPos(chunkX, chunkZ, rand), rand);
+        return new VeinCluster(this, defaultStartPos(chunkX, chunkZ, rand), w, rand);
     }
 
     static class VeinCluster extends AbstractVein<VeinTypeCluster>
     {
         private final Cluster[] spawnPoints;
 
-        VeinCluster(VeinTypeCluster type, BlockPos pos, Random rand)
+        VeinCluster(VeinTypeCluster type, BlockPos pos, World w, Random rand)
         {
-            super(type, pos, rand);
+            super(type, pos, w, rand);
 
             int clusters = (int) (type.clusters * (0.5f + rand.nextFloat()));
             spawnPoints = new Cluster[clusters];

@@ -11,6 +11,7 @@ import net.minecraft.util.math.Vec3d;
 
 import com.alcatrazescapee.oreveins.api.AbstractVein;
 import com.alcatrazescapee.oreveins.api.AbstractVeinType;
+import net.minecraft.world.World;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 @ParametersAreNonnullByDefault
@@ -59,7 +60,7 @@ public class VeinTypeCurve extends AbstractVeinType<VeinTypeCurve.VeinCurve>
 
     @Nonnull
     @Override
-    public VeinCurve createVein(int chunkX, int chunkZ, Random rand)
+    public VeinCurve createVein(World w, int chunkX, int chunkZ, Random rand)
     {
         int maxOffY = getMaxY() - getMinY() - verticalSize;
         int posY = getMinY() + verticalSize / 2 + ((maxOffY > 0) ? rand.nextInt(maxOffY) : 0);
@@ -70,7 +71,7 @@ public class VeinTypeCurve extends AbstractVeinType<VeinTypeCurve.VeinCurve>
                 chunkZ * 16 + rand.nextInt(16)
         );
 
-        return new VeinCurve(this, pos, rand);
+        return new VeinCurve(this, pos, w, rand);
     }
 
     static class VeinCurve extends AbstractVein<VeinTypeCurve>
@@ -79,9 +80,9 @@ public class VeinTypeCurve extends AbstractVeinType<VeinTypeCurve.VeinCurve>
         private boolean isInitialized = false;
         private List<CurveSegment> segmentList;
 
-        VeinCurve(VeinTypeCurve type, BlockPos pos, Random random)
+        VeinCurve(VeinTypeCurve type, BlockPos pos, World w, Random random)
         {
-            super(type, pos, 0.5f * (1.0f + random.nextFloat()));
+            super(type, pos, w, 0.5f * (1.0f + random.nextFloat()));
             this.rand = new Random(random.nextLong());
             this.segmentList = new ArrayList<>();
         }

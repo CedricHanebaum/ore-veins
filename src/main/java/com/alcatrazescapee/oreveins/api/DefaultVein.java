@@ -4,6 +4,7 @@ import java.util.Random;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
 /**
  * A default vein implementation. Used for veins that don't require any additional instance parameters
@@ -14,9 +15,9 @@ import net.minecraft.util.math.BlockPos;
 @ParametersAreNonnullByDefault
 public class DefaultVein extends AbstractVein<DefaultVeinType>
 {
-    public DefaultVein(DefaultVeinType type, BlockPos pos, Random rand)
+    public DefaultVein(DefaultVeinType type, BlockPos pos, World w, Random rand)
     {
-        super(type, pos, rand);
+        super(type, pos, w, rand);
     }
 
     @Override

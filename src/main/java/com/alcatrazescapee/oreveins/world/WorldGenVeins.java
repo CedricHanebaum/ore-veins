@@ -39,7 +39,7 @@ public class WorldGenVeins implements IWorldGenerator
     }
 
     @Nonnull
-    public static List<IVein> getNearbyVeins(int chunkX, int chunkZ, long worldSeed, int radius)
+    public static List<IVein> getNearbyVeins(World w, int chunkX, int chunkZ, long worldSeed, int radius)
     {
         List<IVein> veins = new ArrayList<>();
         for (int x = chunkX - radius; x <= chunkX + radius; x++)
@@ -47,13 +47,13 @@ public class WorldGenVeins implements IWorldGenerator
             for (int z = chunkZ - radius; z <= chunkZ + radius; z++)
             {
                 RANDOM.setSeed(worldSeed + x * 341873128712L + z * 132897987541L);
-                getVeinsAtChunk(veins, x, z, worldSeed);
+                getVeinsAtChunk(w, veins, x, z, worldSeed);
             }
         }
         return veins;
     }
 
-    private static void getVeinsAtChunk(List<IVein> veins, int chunkX, int chunkZ, long worldSeed)
+    private static void getVeinsAtChunk(World w, List<IVein> veins, int chunkX, int chunkZ, long worldSeed)
     {
         Random random = new Random(worldSeed + chunkX * 341873128712L + chunkZ * 132897987541L);
         for (IVeinType type : VeinRegistry.getVeins())
@@ -62,7 +62,7 @@ public class WorldGenVeins implements IWorldGenerator
             {
                 if (random.nextInt(type.getRarity()) == 0)
                 {
-                    IVein vein = type.createVein(chunkX, chunkZ, random);
+                    IVein vein = type.createVein(w, chunkX, chunkZ, random);
                     veins.add(vein);
                 }
             }
@@ -88,7 +88,7 @@ public class WorldGenVeins implements IWorldGenerator
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator, IChunkProvider chunkProvider)
     {
-        List<IVein> veins = getNearbyVeins(chunkX, chunkZ, world.getSeed(), CHUNK_RADIUS);
+        List<IVein> veins = getNearbyVeins(world, chunkX, chunkZ, world.getSeed(), CHUNK_RADIUS);
         if (veins.isEmpty()) return;
 
         int xoff = chunkX * 16 + 8;

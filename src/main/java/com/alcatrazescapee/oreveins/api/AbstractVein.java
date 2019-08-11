@@ -14,18 +14,20 @@ public abstract class AbstractVein<T extends IVeinType<?>> implements IVein<T>
 {
     protected final T type;
     protected final BlockPos pos;
+    protected final World world;
     protected final float size;
 
-    public AbstractVein(T type, BlockPos pos, float size)
+    public AbstractVein(T type, BlockPos pos, World w, float size)
     {
         this.pos = pos;
         this.type = type;
+        this.world = w;
         this.size = size;
     }
 
-    public AbstractVein(T type, BlockPos pos, Random random)
+    public AbstractVein(T type, BlockPos pos, World w, Random random)
     {
-        this(type, pos, 0.7f + random.nextFloat() * 0.3f);
+        this(type, pos, w, 0.7f + random.nextFloat() * 0.3f);
     }
 
     @Nonnull

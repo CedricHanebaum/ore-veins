@@ -23,7 +23,6 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 import com.alcatrazescapee.oreveins.cmd.CommandClearWorld;
-import com.alcatrazescapee.oreveins.cmd.CommandFindVeins;
 import com.alcatrazescapee.oreveins.cmd.CommandVeinInfo;
 import com.alcatrazescapee.oreveins.vein.VeinRegistry;
 import com.alcatrazescapee.oreveins.world.WorldGenReplacer;
@@ -96,7 +95,6 @@ public class OreVeins
         {
             event.registerServerCommand(new CommandClearWorld());
             event.registerServerCommand(new CommandVeinInfo());
-            event.registerServerCommand(new CommandFindVeins());
         }
     }
 
