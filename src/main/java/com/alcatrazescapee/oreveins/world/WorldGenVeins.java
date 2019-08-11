@@ -69,7 +69,7 @@ public class WorldGenVeins implements IWorldGenerator
         }
     }
 
-    private static BlockPos getTopBlockIgnoreVegetation(World world, BlockPos pos)
+    public static BlockPos getTopBlockIgnoreVegetation(World world, BlockPos pos)
     {
         Chunk chunk = world.getChunkFromBlockCoords(pos);
         BlockPos.MutableBlockPos mPos = new BlockPos.MutableBlockPos(pos.getX(), chunk.getTopFilledSegment() + 16, pos.getZ());

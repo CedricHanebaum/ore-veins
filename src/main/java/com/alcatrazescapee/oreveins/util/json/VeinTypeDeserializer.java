@@ -27,6 +27,7 @@ public class VeinTypeDeserializer implements JsonDeserializer<IVeinType<?>>
         types.put("cone", VeinTypeCone.class);
         types.put("pipe", VeinTypePipe.class);
         types.put("curve", VeinTypeCurve.class);
+        types.put("sheet", VeinTypeSheet.class);
     }
 
     @Override
