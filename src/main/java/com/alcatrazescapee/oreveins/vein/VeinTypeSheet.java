@@ -37,7 +37,7 @@ public class VeinTypeSheet extends AbstractVeinType<VeinTypeSheet.VeinSheet>
 
         if(distance2d < radius &&
                 vein.plane.getIntersectionWithLine(new Vec3i(pos), new Vec3i(0, 1, 0)).subtract(new Vec3i(pos)).getLength() < verticalSize)
-            return 1;
+            return 0.001f * density;
         else
             return 0;
     }
