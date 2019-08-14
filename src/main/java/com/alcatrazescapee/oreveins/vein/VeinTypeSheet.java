@@ -2,8 +2,8 @@ package com.alcatrazescapee.oreveins.vein;
 
 import com.alcatrazescapee.oreveins.api.AbstractVein;
 import com.alcatrazescapee.oreveins.api.AbstractVeinType;
-import com.alcatrazescapee.oreveins.util.Plane3i;
-import com.alcatrazescapee.oreveins.util.Vec3i;
+import com.alcatrazescapee.oreveins.util.math.Plane3i;
+import com.alcatrazescapee.oreveins.util.math.Vec3i;
 import com.alcatrazescapee.oreveins.world.WorldGenVeins;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;

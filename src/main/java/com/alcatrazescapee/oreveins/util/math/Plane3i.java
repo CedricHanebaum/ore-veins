@@ -1,4 +1,4 @@
-package com.alcatrazescapee.oreveins.util;
+package com.alcatrazescapee.oreveins.util.math;
 
 import net.minecraft.util.math.BlockPos;
 
