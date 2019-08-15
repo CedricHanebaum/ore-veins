@@ -1,12 +1,13 @@
 package com.alcatrazescapee.oreveins.util.math;
 
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
 import java.util.ArrayList;
 
 public class Spline3
 {
-    private ArrayList<Vec3d> splinePoints;
+    private ArrayList<Vec3d> splinePoints = new ArrayList<Vec3d>();
     
     /**
      * Add a point to the spline.
@@ -58,6 +59,35 @@ public class Spline3
         double tz = .5f * (q0 * splinePoints.get(p0).z + q1 * splinePoints.get(p1).z + q2 * splinePoints.get(p2).z + q3 * splinePoints.get(p3).z);
 
         return new Vec3d(tx, ty, tz);
+    }
+
+    /**
+     * Traverses the spline and returns a list of block positions following the spline. Undefined behaviour for splines
+     * with < 4 points.
+     * @return A list of BlockPos following the spline.
+     */
+    public ArrayList<BlockPos> toBlockList()
+    {
+        ArrayList<BlockPos> list = new ArrayList<BlockPos>();
+        double epsilon = .05;
+
+        Vec3d p0 = getValueAt(0);
+        list.add(new BlockPos(p0.x, p0.y, p0.z));
+
+        double t = epsilon;
+        while(t < getSplineLength())
+        {
+            Vec3d pN = getValueAt(t);
+            BlockPos bpN = new BlockPos(pN.x, pN.y, pN.z);
+            if(!list.get(list.size() - 1).equals(bpN))
+            {
+                list.add(bpN);
+            }
+
+            t += epsilon;
+        }
+
+        return list;
     }
 
 }
